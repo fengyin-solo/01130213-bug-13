@@ -44,6 +44,12 @@ const routes: RouteRecordRaw[] = [
         meta: { title: '生产运营', icon: 'TrendCharts' }
       },
       {
+        path: 'production/detail',
+        name: 'ProductionDetail',
+        component: () => import('@/views/production/detail.vue'),
+        meta: { title: '生产明细详情', hidden: true }
+      },
+      {
         path: 'equipment',
         name: 'Equipment',
         component: () => import('@/views/equipment/index.vue'),

@@ -87,7 +87,7 @@ const isCollapse = ref(false)
 
 const menuList = computed(() => {
   const routes = router.options.routes.find(r => r.path === '/')?.children || []
-  return routes.filter(r => r.meta?.title && r.path !== '')
+  return routes.filter(r => r.meta?.title && r.meta?.hidden !== true && r.path !== '')
 })
 
 const currentTitle = computed(() => {

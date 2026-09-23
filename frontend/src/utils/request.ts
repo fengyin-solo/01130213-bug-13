@@ -1,16 +1,19 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useUserStore } from '@/store/modules/user'
+import { mockAdapter } from '@/mock'
 
 const service: AxiosInstance = axios.create({
   baseURL: '/api',
-  timeout: 30000
+  timeout: 30000,
+  // 前端原型阶段由本地 mock 接管生产/井位接口，未覆盖的接口自动放行到真实后端
+  adapter: mockAdapter
 })
 
 service.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
+  (config: InternalAxiosRequestConfig) => {
     const userStore = useUserStore()
-    if (userStore.token && config.headers) {
+    if (userStore.token) {
       config.headers['Authorization'] = `Bearer ${userStore.token}`
     }
     return config

@@ -1,11 +1,12 @@
 import request from '@/utils/request'
+import { WellInfo } from '@/utils/production'
 
 export function getWellList(params: any) {
   return request({
     url: '/well/list',
     method: 'get',
     params
-  })
+  }).then(res => res.data as WellInfo[])
 }
 
 export function getWellDetail(id: number) {
